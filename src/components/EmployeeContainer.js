@@ -8,7 +8,7 @@ export default class EmployeeContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      employeeData: [{}],
+      employeeData: {},
       filteredEmployees: [{}]
     };
   }
@@ -95,7 +95,7 @@ export default class EmployeeContainer extends Component {
         <SearchForm>
         <input className="search" 
                     value={this.state.employeeData}
-                    onChange={this.handleSearchChange()}
+                    handleSearchChange ={this.handleSearchChange}
                     type="text"
         /> </SearchForm>
         <table>
