@@ -82,7 +82,7 @@ export default class EmployeeContainer extends Component {
 
 
   EmployeeSearch() {
-
+    const searchedEmployee = employeeDataOriginal.filter(employeeDataOriginal => !employeeData);
   }
 
   
@@ -106,6 +106,7 @@ export default class EmployeeContainer extends Component {
             <th>DOB</th>
           </tr>
           {this.renderEmployeeRows()}
+          {this.searchedEmployee}
         </table>
        
 
