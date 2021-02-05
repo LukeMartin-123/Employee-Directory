@@ -90,8 +90,7 @@ export default class EmployeeContainer extends Component {
       <Container>
         <SearchForm>
         <input className="search" 
-                    value={this.state.employeeData}
-                    handleSearchChange ={this.handleSearchChange}
+                    onChange ={this.handleSearchChange}
                     type="text"
         /> </SearchForm>
         <table>
