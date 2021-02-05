@@ -48,6 +48,20 @@ export default class EmployeeContainer extends Component {
     return "";
   }
 
+  handleSearchChange = event => {
+    // Getting the value and name of the input which triggered the change
+    const filter = event.target.value;
+    const filteredList = this.state.employeeData.filter(item => {
+      let values = Object.values(item)
+      .join("")
+      .toLowerCase();
+    return values.indexOf(filter.toLowerCase()) !== -1;
+    // Updating the input's state
+  });
+  this.setState({ filteredUsers: filteredList });
+};
+
+
   componentDidMount() {
     API.getEmployees()
       .then(res => {
@@ -62,15 +76,7 @@ export default class EmployeeContainer extends Component {
       .catch(err => console.log(err));
   };
 
-  handleInputChange = event => {
-    // Getting the value and name of the input which triggered the change
-    const { employeeData} = event.target;
 
-    // Updating the input's state
-    this.setState({
-      employeeData: {}
-    });
-  };
 
   handleFormSubmit = event => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
@@ -79,11 +85,6 @@ export default class EmployeeContainer extends Component {
       employeeData: {}
     });
   };
-
-
-  EmployeeSearch() {
-    const searchedEmployee = employeeDataOriginal.filter(employeeDataOriginal => !employeeData);
-  }
 
   
 //sort()
@@ -106,7 +107,7 @@ export default class EmployeeContainer extends Component {
             <th>DOB</th>
           </tr>
           {this.renderEmployeeRows()}
-          {this.searchedEmployee}
+          
         </table>
        
 
