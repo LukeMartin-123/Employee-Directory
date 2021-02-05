@@ -74,10 +74,6 @@ export default class EmployeeContainer extends Component {
   this.setState({ filteredEmployees: employeeDataFiltered });
 };
 
-
-
-
-
   handleFormSubmit = event => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     event.preventDefault();
