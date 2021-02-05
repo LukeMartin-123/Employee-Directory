@@ -1,6 +1,5 @@
 import { Component } from "react";
 import Container from "./Container";
-import Header from "./Header"
 import SearchForm from "./SearchForm";
 import API from "../utils/API";
 
@@ -16,15 +15,13 @@ export default class EmployeeContainer extends Component {
   renderEmployeeRows() {
     const data = this.state.employeeData;
 
-    console.log("data", data);
-
     if (data.length > 0) {
       //const allEmployeeTrs = 
       return data.map((datum) => {
         return (
           <tr key={datum.login.uuid}>
             <td className="employee-image">
-              <img src={datum.picture.medium}/>
+              <img src={datum.picture.medium} />
             </td>
             <td className="employee-name">
               {datum.name.first} {datum.name.last}
@@ -51,10 +48,10 @@ export default class EmployeeContainer extends Component {
     API.getEmployees()
       .then(res => {
         //update the state and trigger rerender
-        this.setState({ 
+        this.setState({
           employeeData: res.data.results,
           filteredEmployees: res.data.results
-         })
+        })
 
       })
       .catch(err => console.log(err));
@@ -63,16 +60,18 @@ export default class EmployeeContainer extends Component {
 
   handleSearchChange = event => {
     // Getting the value and name of the input which triggered the change
+    console.log(event.target.value);
     const filter = event.target.value;
-    const employeeDataFiltered = this.state.employeeData.filter(item => {
+    const filteredEmployees = this.state.employeeData.filter(item => {
       let values = Object.values(item)
-      .join("")
-      .toLowerCase();
-    return values.indexOf(filter.toLowerCase()) !== -1;
-    // Updating the input's state
-  });
-  this.setState({ filteredEmployees: employeeDataFiltered });
-};
+        .join("")
+        .toLowerCase();
+      return values.indexOf(filter.toLowerCase()) !== -1;
+      // Updating the input's state
+    });
+    this.setState({ newList: filteredEmployees });
+
+  };
 
   handleFormSubmit = event => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
@@ -82,29 +81,26 @@ export default class EmployeeContainer extends Component {
     });
   };
 
-  
-//sort()
-//onChange={this.handleSearchInputChange}
+  //sort()
+  //onChange={this.handleSearchInputChange}
   render() {
     return (
       <Container>
-        <SearchForm>
-        <input className="search" 
-                    onChange ={this.handleSearchChange}
-                    type="text"
-        /> </SearchForm>
+        <SearchForm search={this.handleSearchChange}>
+
+        </SearchForm>
         <table>
-          <tr>
+          <tbody>
             <th>Image</th>
             <th>Name</th>
             <th>Phone</th>
             <th>Email</th>
             <th>DOB</th>
-          </tr>
+          </tbody>
           {this.renderEmployeeRows()}
-          
+
         </table>
-       
+
 
       </Container>
     );
