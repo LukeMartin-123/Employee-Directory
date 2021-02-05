@@ -60,16 +60,15 @@ export default class EmployeeContainer extends Component {
 
   handleSearchChange = event => {
     // Getting the value and name of the input which triggered the change
-    console.log(event.target.value);
     const filter = event.target.value;
-    const filteredEmployees = this.state.employeeData.filter(item => {
+    const filteredList = this.state.employeeData.filter(item => {
       let values = Object.values(item)
         .join("")
         .toLowerCase();
       return values.indexOf(filter.toLowerCase()) !== -1;
       // Updating the input's state
     });
-    this.setState({ newList: filteredEmployees });
+    this.setState({ filteredEmployees: filteredList });
 
   };
 
