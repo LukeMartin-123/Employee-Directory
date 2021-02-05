@@ -1,6 +1,5 @@
 import { Component } from "react";
 import Container from "./Container";
-import Card from "./Card";
 import Header from "./Header"
 import SearchForm from "./SearchForm";
 import API from "../utils/API";
@@ -9,8 +8,8 @@ export default class EmployeeContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      employeeData: {},
-      employeeDataOriginal: {}
+      employeeData: [{}],
+      filteredEmployees: [{}]
     };
   }
 
@@ -48,33 +47,34 @@ export default class EmployeeContainer extends Component {
     return "";
   }
 
+  componentDidMount() {
+    API.getEmployees()
+      .then(res => {
+        //update the state and trigger rerender
+        this.setState({ 
+          employeeData: res.data.results,
+          filteredEmployees: res.data.results
+         })
+
+      })
+      .catch(err => console.log(err));
+  };
+
+
   handleSearchChange = event => {
     // Getting the value and name of the input which triggered the change
     const filter = event.target.value;
-    const filteredList = this.state.employeeData.filter(item => {
+    const employeeDataFiltered = this.state.employeeData.filter(item => {
       let values = Object.values(item)
       .join("")
       .toLowerCase();
     return values.indexOf(filter.toLowerCase()) !== -1;
     // Updating the input's state
   });
-  this.setState({ filteredUsers: filteredList });
+  this.setState({ filteredEmployees: employeeDataFiltered });
 };
 
 
-  componentDidMount() {
-    API.getEmployees()
-      .then(res => {
-        console.log("**********res: ",res.data.results);
-        //update the state and trigger rerender
-        this.setState({ 
-          employeeData: res.data.results,
-          employeeDataOriginal: res.data.results
-         })
-
-      })
-      .catch(err => console.log(err));
-  };
 
 
 
@@ -95,7 +95,7 @@ export default class EmployeeContainer extends Component {
         <SearchForm>
         <input className="search" 
                     value={this.state.employeeData}
-                    onChange={this.handleInputChange}
+                    onChange={this.handleSearchChange()}
                     type="text"
         /> </SearchForm>
         <table>
