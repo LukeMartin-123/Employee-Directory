@@ -57,19 +57,7 @@ export default class EmployeeContainer extends Component {
       .catch(err => console.log(err));
   };
 
-  // handleInputChange = event => {
-  //   const value = event.target.value;
-  //   const name = event.target.name;
-  //   this.setState({
-  //     [name]: value
-  //   });
-  // };
 
-  // // When the form is submitted, search the OMDB API for the value of `this.state.search`
-  // handleFormSubmit = event => {
-  //   event.preventDefault();
-  //   this.searchEmployees(this.state.search);
-  // };
 
   
 //sort()
@@ -88,14 +76,8 @@ export default class EmployeeContainer extends Component {
           </tr>
           {this.renderEmployeeRows()}
         </table>
-        {/* <SearchForm></SearchForm> */}
-        {/* <Card heading="Search">
-          <SearchForm
-            value={this.state.search}
-            handleInputChange={this.handleInputChange}
-            handleFormSubmit={this.handleFormSubmit}
-          />
-        </Card> */}
+        <SearchForm></SearchForm>
+
       </Container>
     );
   }

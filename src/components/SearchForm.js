@@ -1,5 +1,11 @@
 import React from "react";
 
+
+
+value={this.state.search}
+handleInputChange={this.handleInputChange}
+handleFormSubmit={this.handleFormSubmit}
+
 function SearchForm(props) {
   return (
     <form>
