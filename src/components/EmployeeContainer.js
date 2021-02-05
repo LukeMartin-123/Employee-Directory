@@ -62,8 +62,28 @@ export default class EmployeeContainer extends Component {
       .catch(err => console.log(err));
   };
 
+  handleInputChange = event => {
+    // Getting the value and name of the input which triggered the change
+    const { employeeData} = event.target;
+
+    // Updating the input's state
+    this.setState({
+      employeeData: {}
+    });
+  };
+
+  handleFormSubmit = event => {
+    // Preventing the default behavior of the form submit (which is to refresh the page)
+    event.preventDefault();
+    this.setState({
+      employeeData: {}
+    });
+  };
 
 
+  EmployeeSearch() {
+
+  }
 
   
 //sort()
@@ -71,7 +91,12 @@ export default class EmployeeContainer extends Component {
   render() {
     return (
       <Container>
-        <input className="search" />
+        <SearchForm>
+        <input className="search" 
+                    value={this.state.employeeData}
+                    onChange={this.handleInputChange}
+                    type="text"
+        /> </SearchForm>
         <table>
           <tr>
             <th>Image</th>
@@ -82,7 +107,7 @@ export default class EmployeeContainer extends Component {
           </tr>
           {this.renderEmployeeRows()}
         </table>
-        <SearchForm></SearchForm>
+       
 
       </Container>
     );
