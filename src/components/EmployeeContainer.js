@@ -9,7 +9,8 @@ export default class EmployeeContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      employeeData: {}
+      employeeData: {},
+      employeeDataOriginal: {}
     };
   }
 
@@ -52,10 +53,15 @@ export default class EmployeeContainer extends Component {
       .then(res => {
         console.log("**********res: ",res.data.results);
         //update the state and trigger rerender
-        this.setState({ employeeData: res.data.results })
+        this.setState({ 
+          employeeData: res.data.results,
+          employeeDataOriginal: res.data.results
+         })
+
       })
       .catch(err => console.log(err));
   };
+
 
 
 
