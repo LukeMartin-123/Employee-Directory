@@ -8,12 +8,12 @@ export default class EmployeeContainer extends Component {
     super(props);
     this.state = {
       employeeData: {},
-      filteredEmployees: [{}]
+      filteredEmployees: {}
     };
   }
 
   renderEmployeeRows() {
-    const data = this.state.employeeData;
+    const data = this.state.filteredEmployees;
 
     if (data.length > 0) {
       //const allEmployeeTrs = 
@@ -40,7 +40,6 @@ export default class EmployeeContainer extends Component {
       });
       //return allEmployeeTrs 
     }
-
     return "";
   }
 
@@ -72,13 +71,7 @@ export default class EmployeeContainer extends Component {
 
   };
 
-  handleFormSubmit = event => {
-    // Preventing the default behavior of the form submit (which is to refresh the page)
-    event.preventDefault();
-    this.setState({
-      employeeData: {}
-    });
-  };
+
 
   //sort()
   //onChange={this.handleSearchInputChange}
